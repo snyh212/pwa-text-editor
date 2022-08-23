@@ -11,9 +11,7 @@ module.exports = () => {
     mode: 'development',
     entry: {
       main: './src/js/index.js',
-      install: './src/js/install.js',
-      editor: './src/js/editor.js',
-      header: './src/js/header.js'
+      install: './src/js/install.js'
     },
     output: {
       filename: '[name].bundle.js',
@@ -26,18 +24,18 @@ module.exports = () => {
       }),
       new InjectManifest({
         swSrc: './src-sw.js',
-        swDest: 'src-sw.js',
+        swDest: './src-sw.js',
       }),
       new WebpackPwaManifest({
         fingerprints: false,
         inject: true,
         name: 'Text-Editor',
-        short_name: 'Text',
+        short_name: 'Editor',
         description: 'Edit your text!',
         background_color: '#225ca3',
         theme_color: '#225ca3',
-        start_url: '/',
-        publicPath: '/',
+        start_url: './',
+        publicPath: './',
         icons: [
           {
             src: path.resolve('src/images/logo.png'),
@@ -55,7 +53,7 @@ module.exports = () => {
           use: ['style-loader', 'css-loader'],
         },
         {
-          test: /\.m?js$/,
+          test: /\.m?js$/i,
           exclude: /node_modules/,
           use: {
             loader: 'babel-loader',
